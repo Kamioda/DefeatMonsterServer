@@ -9,9 +9,12 @@
   "author": "Kamioda Warrior",
   "license": "ISC",
   "devDependencies": {
+    "ava": "^0.25.0",
     "eslint": "^5.9.0"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "crypto-random-string": "^1.0.0",
     "express": "^4.16.4"
   }
 }
