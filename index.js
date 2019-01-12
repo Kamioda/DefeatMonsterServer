@@ -21,7 +21,7 @@ const main = async () => {
 		setTimeout(() =>{
 			if (!roomlist.get(UID).seedIsValid()) roomlist.delete(UID);
 		}, settinginfo.data.timeout * 1000);
-		res.send(UID);
+		res.send(JSON.stringify({ "uid" : UID }));
 	});
 	app.use(bodyParser.json( { type: 'application/*+json'}));
 	app.listen(3000);
