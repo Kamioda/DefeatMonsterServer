@@ -2,7 +2,10 @@ const express = require('express');
 const randomstring = require('crypto-random-string');
 const RoomInfo = require("./roominfo.js");
 const bodyParser = require('body-parser');
-const roomTypeValid = require('./roomTypeValidator.js');
+const startSpec = require('./spec/start');
+const setseedSpec = require('./spec/setseed');
+const enterroomSpec = require('./spec/enterroom');
+const s = require('@json-spec/core');
 const app = express();
 
 /** @type {Map<RoomInfo>} */
@@ -14,7 +17,7 @@ const jsonParser = bodyParser.json();
 const main = async () => {
 	const settinginfo = JSON.parse(await fse.readFile('settings.json', 'utf8'));
 	app.post('/start', jsonParser, (req, res) => {
-		if (!req.body || !roomTypeValid(req.body.gamemode)) return res.sendStatus(400);
+		if (!req.body || !s.isValid(startSpec, req.body)) return res.sendStatus(400);
 		let UID = randomstring(settinginfo.data.uidlength);
 		while (roomlist.has(UID)) UID = randomstring(settinginfo.data.uidlength);
 		roomlist.set(UID, new RoomInfo(req.body.gamemode));
