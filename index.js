@@ -28,6 +28,12 @@ const main = async () => {
 		);
 		res.send(JSON.stringify({ "uid" : UID }));
 	});
+	app.post('/setseed', jsonParser, (req, res) => {
+		if (!req.body || !s.isValid(setseedSpec, req.body)) return res.sendStatus(400);
+		if (!roomlist.has(req.body.uid)) return res.sendStatus(404);
+		roomlist.get(req.body.uid).setSeed(req.body.seed);
+		return res.sendStatus(200);
+	});
 	app.use(bodyParser.json( { type: 'application/*+json'}));
 	app.listen(settinginfo.port);
 };
