@@ -24,7 +24,7 @@ const main = async () => {
 		res.send(JSON.stringify({ "uid" : UID }));
 	});
 	app.use(bodyParser.json( { type: 'application/*+json'}));
-	app.listen(3000);
+	app.listen(settinginfo.port);
 };
 
 main();
