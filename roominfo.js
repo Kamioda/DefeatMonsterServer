@@ -1,4 +1,5 @@
 "use scrict";
+const randomstring = require('crypto-random-string');
 const s = require('@json-spec/core');
 const seedSpec = require('./spec/seed');
 
@@ -7,6 +8,7 @@ class RoomInfo {
         this.seed_ = [];
         this.gamemode_ = gamemode;
         this.timer_ = null;
+        this.player_ = [];
     }
     setSeed(seedData) {
         this.seed_ = seedData;
@@ -23,6 +25,20 @@ class RoomInfo {
         if (this.timer_ != null) clearTimeout(this.timer_);
         this.timer_ = timer;
     }
+    addPlayer(pidLength) {
+        switch (this.player_.length) {
+            case 0: 
+                this.player_.push(randomstring(pidLength));
+                return this.player_[0];
+            case 1: {
+                let pid = randomstring(pidLength);
+                while (this.player_[0] === pid) pid = randomstring(pidLength);
+                this.player_.push(pid);
+                return pid;
+            }
+            default:
+                return null;
+        }
     }
 }
 module.exports = RoomInfo;
