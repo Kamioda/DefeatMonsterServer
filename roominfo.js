@@ -7,8 +7,14 @@ class RoomInfo {
         this.seed_ = [];
         this.gamemode_ = gamemode;
     }
+    setSeed(seedData) {
+        this.seed_ = seedData;
+    }
     seedIsValid(){
         return s.IsValid(seedSpec, this.seed_);
+    }
+    getSeed() {
+        return this.seed_;
     }
     }
 }
