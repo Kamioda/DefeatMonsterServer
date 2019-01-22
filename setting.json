@@ -2,6 +2,8 @@
     "version": "1.0.0",
     "data":{
         "timeout": 120,
+        "uidlength" : 10,
+        "pidlength" : 8
     },
     "port" : 3000
 }
