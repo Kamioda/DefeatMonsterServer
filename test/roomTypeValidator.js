@@ -1,5 +1,5 @@
 import test from 'ava';
-import roomTypeValidator from '../roomTypeValidator';
+import roomTypeValidator from '../spec/impl/roomTypeValidator';
 
 test('roomTypeIsValid', t => {
     t.false(roomTypeValidator(0));
