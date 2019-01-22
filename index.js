@@ -21,9 +21,11 @@ const main = async () => {
 		let UID = randomstring(settinginfo.data.uidlength);
 		while (roomlist.has(UID)) UID = randomstring(settinginfo.data.uidlength);
 		roomlist.set(UID, new RoomInfo(req.body.gamemode));
-		setTimeout(() =>{
+		roomlist.get(UID).setTimer(
+			setTimeout(() => {
 			if (!roomlist.get(UID).seedIsValid()) roomlist.delete(UID);
-		}, settinginfo.data.timeout * 1000);
+			}, settinginfo.data.timeout * 1000)
+		);
 		res.send(JSON.stringify({ "uid" : UID }));
 	});
 	app.use(bodyParser.json( { type: 'application/*+json'}));
