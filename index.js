@@ -23,7 +23,7 @@ const main = async () => {
 		roomlist.set(UID, new RoomInfo(req.body.gamemode));
 		roomlist.get(UID).setTimer(
 			setTimeout(() => {
-			if (!roomlist.get(UID).seedIsValid()) roomlist.delete(UID);
+				if (!roomlist.get(UID).seedIsValid()) roomlist.delete(UID);
 			}, settinginfo.data.timeout * 1000)
 		);
 		res.send(JSON.stringify({ "uid" : UID }));
@@ -33,6 +33,11 @@ const main = async () => {
 		if (!roomlist.has(req.body.uid)) return res.sendStatus(404);
 		roomlist.get(req.body.uid).setSeed(req.body.seed);
 		return res.sendStatus(200);
+	});
+	app.post('/enterroom', jsonParser, (req, res) => {
+		if (!req.body || !s.isValid(enterroomSpec, req.body)) return res.sendStatus(400);
+		if (!roomlist.has(req.body.uid)) return res.sendStatus(404);
+		res.send(JSON.stringify({ "seed" : roomlist.get(req.body.uid).getSeed()}));
 	});
 	app.use(bodyParser.json( { type: 'application/*+json'}));
 	app.listen(settinginfo.port);
