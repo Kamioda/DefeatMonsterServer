@@ -57,5 +57,8 @@ class RoomInfo {
                 return null;
         }
     }
+    twoPlayerExist() {
+        return this.player_.length === 2;
+    }
 }
 module.exports = RoomInfo;
