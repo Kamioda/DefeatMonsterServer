@@ -8,7 +8,7 @@ const enterroomSpec = require('./spec/enterroom');
 const s = require('@json-spec/core');
 const app = express();
 
-/** @type {Map<RoomInfo>} */
+/** @type {Map<string,RoomInfo>} */
 const roomlist = new Map();
 
 const fse = require('fs/promises');
