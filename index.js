@@ -15,7 +15,10 @@ const fse = require('fs/promises');
 const jsonParser = bodyParser.json();
 
 const main = async () => {
-	const settinginfo = JSON.parse(await fse.readFile('settings.json', 'utf8'));
+	const settinginfo = JSON.parse(await fse.readFile('setting.json', 'utf8').catch(er => {
+		console.error("Fail to open setting.json", er);
+		process.exit(1);
+	}));
 	app.post('/start', jsonParser, (req, res) => {
 		if (!req.body || !s.isValid(startSpec, req.body)) return res.sendStatus(400);
 		let UID = randomstring(settinginfo.data.uidlength);
