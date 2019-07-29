@@ -29,7 +29,7 @@ const main = async () => {
 				if (!roomlist.get(UID).seedIsValid()) roomlist.delete(UID);
 			}, settinginfo.data.timeout * 1000)
 		);
-		res.send(JSON.stringify({ "uid" : UID }));
+		res.send(JSON.stringify({ "uid" : UID, "pid" : roomlist.get(UID).addPlayer(settinginfo.data.pidlength) }));
 	});
 	app.post('/setseed', jsonParser, (req, res) => {
 		if (!req.body || !s.isValid(setseedSpec, req.body)) return res.sendStatus(400);
