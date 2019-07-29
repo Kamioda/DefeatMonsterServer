@@ -44,6 +44,12 @@ const main = async () => {
 		if (pid === null) return res.sendStatus(403);
 		res.send(JSON.stringify({ "seed" : roomlist.get(req.body.uid).getSeed(), "pid" : pid }));
 	});
+	app.get('/partnerexist', jsonParser, (req, res) => {
+		// enterroomSpecと要求が同じなので流用
+		if (!req.body || !s.isValid(enterroomSpec, req.body)) return res.sendStatus(400);
+		if (!roomlist.has(req.body.uid) || !roomlist.get(req.body.uid).twoPlayerExist()) return res.sendStatus(404);
+		return res.sendStatus(200);
+	});
 	});
 	app.use(bodyParser.json( { type: 'application/*+json'}));
 	app.listen(settinginfo.port);
