@@ -55,4 +55,7 @@ const main = async () => {
 	app.listen(settinginfo.port);
 };
 
-main();
+main().catch(er => {
+	console.error(er);
+	process.exit(1);
+});
