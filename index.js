@@ -40,7 +40,10 @@ const main = async () => {
 	app.post('/enterroom', jsonParser, (req, res) => {
 		if (!req.body || !s.isValid(enterroomSpec, req.body)) return res.sendStatus(400);
 		if (!roomlist.has(req.body.uid)) return res.sendStatus(404);
-		res.send(JSON.stringify({ "seed" : roomlist.get(req.body.uid).getSeed()}));
+		const pid = roomlist.get(req.body.uid).addPlayer(settinginfo.data.pidlength);
+		if (pid === null) return res.sendStatus(403);
+		res.send(JSON.stringify({ "seed" : roomlist.get(req.body.uid).getSeed(), "pid" : pid }));
+	});
 	});
 	app.use(bodyParser.json( { type: 'application/*+json'}));
 	app.listen(settinginfo.port);
