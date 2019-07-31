@@ -20,10 +20,12 @@ const characterdataSpec = s.object({
     required: {
         uid : uidSpec,
         pid : pidSpec,
+        gamemode: s.spec(roomTypeValid),
         name : i => { return i.bytes() <= 10; },
         sex : i => { return i >= 0 && i <= 3; },
         style : i => { return i >= 0 && i <= 3; },
         partner : i => {
+            if (i.length === 0 && gamemode === 2) return true;
             for (var j = 0; j < partnerid.characterdatabook.length; j++){
                 if (partnerid.characterdatabook[j].tag == i) return true;
             }
