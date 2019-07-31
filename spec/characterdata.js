@@ -1,8 +1,8 @@
 const s = require('@json-spec/core');
 const uidSpec = require('./uid');
+const pidSpec = require('./pid');
 const fse = require('fs/promises');
 const partnerid = JSON.parse(fse.readFileSync('btpartner.json', 'utf8'));
-const settinginfo = JSON.parse(fse.readFileSync('setting.json', 'utf8'));
 
 String.prototype.bytes = () => {
     var length = 0;
@@ -19,7 +19,7 @@ String.prototype.bytes = () => {
 const characterdataSpec = s.object({
     required: {
         uid : uidSpec,
-        pid : i => { return i.length === settinginfo.data.pidlength; },
+        pid : pidSpec,
         name : i => { return i.bytes() <= 10; },
         sex : i => { return i >= 0 && i <= 3; },
         style : i => { return i >= 0 && i <= 3; },
