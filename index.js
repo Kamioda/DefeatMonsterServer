@@ -50,6 +50,13 @@ const main = async () => {
 		if (!roomlist.has(req.body.uid) || !roomlist.get(req.body.uid).twoPlayerExist()) return res.sendStatus(404);
 		return res.sendStatus(200);
 	});
+	app.post('/setcharacter', jsonParser, (req, res) => {
+		if (!req.body || !s.isValid(characterdataSpec, req.body)) return res.sendStatus(400);
+		if (!roomlist.has(req.body.uid) || !roomlist.get(req.body.uid).setCharacterConfig(req.body)) return res.sendStatus(404);
+		return res.sendStatus(200);
+	});
+	app.get('/getpartnerparam', jsonParser, (req, res) =>{
+		
 	});
 	app.use(bodyParser.json( { type: 'application/*+json'}));
 	app.listen(settinginfo.port);

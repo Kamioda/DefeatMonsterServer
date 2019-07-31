@@ -12,6 +12,8 @@ class RoomInfo {
         this.timer_ = null;
         /** @type {string[]} */
         this.player_ = [];
+        /** @type {string[]} */
+        this.characterconfig_ = [];
     }
     /**
      * Set seed and clear timer passed via setTimer
@@ -55,6 +57,24 @@ class RoomInfo {
             }
             default:
                 return null;
+        }
+    }
+    setCharacterConfig(characterConfig){
+        switch(this.characterconfig_.length){
+            case 0:
+                this.characterconfig_.push(characterConfig);
+                return true;
+            case 1: {
+                const newCharacterConfig = JSON.parse(characterConfig);
+                const existCharacterConfig = JSON.parse(this.characterconfig_[0]);
+                if (newCharacterConfig.partner === existCharacterConfig.partner) {
+                    this.characterconfig_.push(characterConfig);
+                    return true;
+                }
+                return false;
+            }
+            default:
+                return false;
         }
     }
     twoPlayerExist() {
