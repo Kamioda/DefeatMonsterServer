@@ -59,7 +59,7 @@ class RoomInfo {
                 return null;
         }
     }
-    setCharacterConfig(characterConfig){
+    setCharacterConfig(characterConfig) {
         switch(this.characterconfig_.length){
             case 0:
                 this.characterconfig_.push(characterConfig);
