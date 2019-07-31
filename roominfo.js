@@ -89,6 +89,9 @@ class RoomInfo {
     twoPlayerExist() {
         return this.player_.length === 2;
     }
+    isRoomPlayer(pid) {
+        return pid === this.player_[0] || pid === this.player_[1];
+    }
     setBattleCommand(commandjson) {
         this.battlecommand_.push(commandjson);
     }
