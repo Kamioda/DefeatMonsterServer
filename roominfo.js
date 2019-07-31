@@ -95,5 +95,12 @@ class RoomInfo {
     setBattleCommand(commandjson) {
         this.battlecommand_.push(commandjson);
     }
+    getBattleCommand(pid) {
+        if (this.battlecommand_.length < 2) return null;
+        else {
+            const firstBattleCommand = JSON.parse(this.battlecommand_[0]);
+            return firstBattleCommand.pid === pid ? this.battlecommand_[0] : this.battlecommand_[1];
+        }
+    }
 }
 module.exports = RoomInfo;
