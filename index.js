@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const startSpec = require('./spec/start');
 const setseedSpec = require('./spec/setseed');
 const enterroomSpec = require('./spec/enterroom');
+const characterdataSpec = require('./spec/characterdata');
 const s = require('@json-spec/core');
 const app = express();
 
