@@ -6,6 +6,7 @@ const startSpec = require('./spec/start');
 const setseedSpec = require('./spec/setseed');
 const enterroomSpec = require('./spec/enterroom');
 const characterdataSpec = require('./spec/characterdata');
+const getparameterSpec = require('./spec/getparameter');
 const s = require('@json-spec/core');
 const app = express();
 
@@ -57,7 +58,11 @@ const main = async () => {
 		return res.sendStatus(200);
 	});
 	app.get('/getpartnerparam', jsonParser, (req, res) =>{
-		
+		if (!req.body || !s.isValid(getparameterSpec, req.body)) return res.sendStatus(400);
+		if (!roomlist.has(req.body.uid)) return res.sendStatus(404);
+		const param = roomlist.get(req.body.uid).getCharacterConfig(req.body.pid);
+		if (param === null) return res.sendStatus(403);
+		res.send(param);
 	});
 	app.use(bodyParser.json( { type: 'application/*+json'}));
 	app.listen(settinginfo.port);

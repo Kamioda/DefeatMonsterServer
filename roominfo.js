@@ -77,6 +77,13 @@ class RoomInfo {
                 return false;
         }
     }
+    getCharacterConfig(pid) {
+        if (this.characterconfig_.length < 2) return null;
+        else {
+            const firstCharacterConfig = JSON.parse(this.characterconfig_[0]);
+            return firstCharacterConfig.pid === pid ? this.characterconfig_[0] : this.characterconfig_[1];
+        }
+    }
     twoPlayerExist() {
         return this.player_.length === 2;
     }
