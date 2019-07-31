@@ -74,6 +74,15 @@ const main = async () => {
 		roomlist.get(req.body.uid).setBattleCommand(req.body);
 		return res.sendStatus(200);
 	});
+	app.get('/getbattlecommand', jsonParser, (req, res) => {
+		// getparameterSpecと要求が同じなので流用
+		if (!req.body || !s.isValid(getparameterSpec, req.body)) return res.sendStatus(400);
+		if (!roomlist.has(req.body.uid)) return res.sendStatus(404);
+		if (!roomlist.get(req.body.uid).isRoomPlayer(req.body.pid)) return res.sendStatus(403);
+		const command = roomlist.get(req.body.uid).getBattleCommand(req.body.pid);
+		if (command === null) return res.sendStatus(403);
+		res.send(command);
+	});
 	app.use(bodyParser.json( { type: 'application/*+json'}));
 	app.listen(settinginfo.port);
 };
