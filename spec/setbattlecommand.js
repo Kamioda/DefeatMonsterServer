@@ -5,7 +5,7 @@ const attackmagic = JSON.parse(fse.readFileSync('AttackMagic.json', 'utf8'));
 const singlecuremagic = JSON.parse(fse.readFileSync('SingleCureMagic.json', 'utf8'));
 const rangecuremagic = JSON.parse(fse.readFileSync('AttackMagic.json', 'utf8'));
 
-const battlecommandSpec = s.object({
+const setbattlecommandSpec = s.object({
     required: {
         uid : uidSpec,
         pid : pidSpec,
@@ -24,4 +24,4 @@ const battlecommandSpec = s.object({
     }
 });
 
-module.exports = battlecommandSpec;
+module.exports = setbattlecommandSpec;
