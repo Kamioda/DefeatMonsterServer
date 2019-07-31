@@ -14,6 +14,8 @@ class RoomInfo {
         this.player_ = [];
         /** @type {string[]} */
         this.characterconfig_ = [];
+        /** @type {string[]} */
+        this.battlecommand_ = [];
     }
     /**
      * Set seed and clear timer passed via setTimer
@@ -86,6 +88,9 @@ class RoomInfo {
     }
     twoPlayerExist() {
         return this.player_.length === 2;
+    }
+    setBattleCommand(commandjson) {
+        this.battlecommand_.push(commandjson);
     }
 }
 module.exports = RoomInfo;
