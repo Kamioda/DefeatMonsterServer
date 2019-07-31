@@ -1,10 +1,7 @@
 const s = require('@json-spec/core');
 const uidSpec = require('./uid');
 const fse = require('fs/promises');
-const partnerid = JSON.parse(await fse.readFile('btpartner.json', 'utf8').catch(er => {
-    console.error("Fail to open setting.json", er);
-    process.exit(1);
-}));
+const partnerid = JSON.parse(fse.readFileSync('btpartner.json', 'utf8'));
 String.prototype.bytes = () => {
     var length = 0;
     for (var i = 0; i < this.length; i++) {
