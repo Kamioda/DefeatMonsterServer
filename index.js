@@ -55,6 +55,7 @@ const main = async () => {
 	app.post('/setcharacter', jsonParser, (req, res) => {
 		if (!req.body || !s.isValid(characterdataSpec, req.body)) return res.sendStatus(400);
 		if (!roomlist.has(req.body.uid) || !roomlist.get(req.body.uid).setCharacterConfig(req.body)) return res.sendStatus(404);
+		if (!roomlist.get(req.body.uid).isRoomPlayer(req.body.pid)) return res.sendStatus(403);
 		return res.sendStatus(200);
 	});
 	app.get('/getpartnerparam', jsonParser, (req, res) =>{
