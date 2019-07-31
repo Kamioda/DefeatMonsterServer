@@ -5,17 +5,17 @@ const fse = require('fs/promises');
 const partnerid = JSON.parse(fse.readFileSync('btpartner.json', 'utf8'));
 
 String.prototype.bytes = () => {
-    var length = 0;
-    for (var i = 0; i < this.length; i++) {
-      var c = this.charCodeAt(i);
-      if ((c >= 0x0 && c < 0x81) || (c === 0xf8f0) || (c >= 0xff61 && c < 0xffa0) || (c >= 0xf8f1 && c < 0xf8f4)) {
-        length += 1;
-      } else {
-        length += 2;
-      }
+  var length = 0;
+  for (var i = 0; i < this.length; i++) {
+    var c = this.charCodeAt(i);
+    if ((c >= 0x0 && c < 0x81) || (c === 0xf8f0) || (c >= 0xff61 && c < 0xffa0) || (c >= 0xf8f1 && c < 0xf8f4)) {
+      length += 1;
+    } else {
+      length += 2;
     }
-    return length;
-  };  
+  }
+  return length;
+};  
 const characterdataSpec = s.object({
     required: {
         uid : uidSpec,
