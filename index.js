@@ -7,6 +7,7 @@ const setseedSpec = require('./spec/setseed');
 const enterroomSpec = require('./spec/enterroom');
 const characterdataSpec = require('./spec/characterdata');
 const getparameterSpec = require('./spec/getparameter');
+const setBattleCommandSpec = require('./spec/setbattlecommand');
 const s = require('@json-spec/core');
 const app = express();
 
@@ -65,6 +66,13 @@ const main = async () => {
 		const param = roomlist.get(req.body.uid).getCharacterConfig(req.body.pid);
 		if (param === null) return res.sendStatus(403);
 		res.send(param);
+	});
+	app.post('/setbattlecommand', jsonParser, (req, res) => {
+		if (!req.body || !s.isValid(setBattleCommandSpec, req.body)) return res.sendStatus(400);
+		if (!roomlist.has(req.body.uid)) return res.sendStatus(404);
+		if (!roomlist.get(req.body.uid).isRoomPlayer(req.body.pid)) return res.sendStatus(403);
+		roomlist.get(req.body.uid).setBattleCommand(req.body);
+		return res.sendStatus(200);
 	});
 	app.use(bodyParser.json( { type: 'application/*+json'}));
 	app.listen(settinginfo.port);
