@@ -83,6 +83,13 @@ const main = async () => {
 		if (command === null) return res.sendStatus(403);
 		res.send(command);
 	});
+	app.post('/gameend', jsonParser, (req, res) => {
+		if (!req.body || !s.isValid(getparameterSpec, req.body)) return res.sendStatus(400);
+		if (!roomlist.has(req.body.uid)) return res.sendStatus(404);
+		if (!roomlist.get(req.body.uid).isRoomPlayer(req.body.pid)) return res.sendStatus(403);
+		if (!roomlist.get(req.body.uid).deleteRoomPlayer(req.body.pid)) roomlist.delete(req.body.uid);
+		return res.sendStatus(200);
+	});
 	app.use(bodyParser.json( { type: 'application/*+json'}));
 	app.listen(settinginfo.port);
 };
