@@ -105,6 +105,15 @@ class RoomInfo {
             else if (secondBattleCommand.pid === pid) return this.battlecommand_[0];
         }
         return null;
+    }
+    deleteRoomPlayer(pid) {
+        if (this.player_[0] === pid) {
+            delete this.player_[0];
+            return true;
+        }
+        else if (this.player_[1] === pid) {
+            delete this.player_[1];
+            return true;
         }
     }
 }
