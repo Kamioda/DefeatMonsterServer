@@ -92,7 +92,9 @@ class RoomInfo {
         return this.player_.length === 2;
     }
     isRoomPlayer(pid) {
-        return pid === this.player_[0] || pid === this.player_[1];
+        return this.player_.length === 2
+            ? pid === this.player_[0] || pid === this.player_[1]
+            : pid === this.player[0];
     }
     setBattleCommand(commandjson) {
         this.battlecommand_.push(commandjson);
