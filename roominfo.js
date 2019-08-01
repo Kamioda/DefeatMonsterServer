@@ -98,10 +98,13 @@ class RoomInfo {
         this.battlecommand_.push(commandjson);
     }
     getBattleCommand(pid) {
-        if (this.battlecommand_.length < 2) return null;
-        else {
+        if (this.battlecommand_.length === 2) {
             const firstBattleCommand = JSON.parse(this.battlecommand_[0]);
-            return firstBattleCommand.pid === pid ? this.battlecommand_[0] : this.battlecommand_[1];
+            const secondBattleCommand = JSON.parse(this.battlecommand_[1]);
+            if (firstBattleCommand.pid === pid) return this.battlecommand_[1];
+            else if (secondBattleCommand.pid === pid) return this.battlecommand_[0];
+        }
+        return null;
         }
     }
 }
