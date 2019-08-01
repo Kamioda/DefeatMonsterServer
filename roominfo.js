@@ -109,6 +109,7 @@ class RoomInfo {
         return null;
     }
     deleteRoomPlayer(pid) {
+        if (this.player_.length) return false;
         if (this.player_[0] === pid) {
             delete this.player_[0];
             return true;
